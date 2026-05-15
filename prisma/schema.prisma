@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// npm exec prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id               Int            @id @default(autoincrement())
+  Name             String         @db.VarChar(100)
+  email            String         @unique @db.VarChar(191)
+  password         String
+  telephone        String         @db.VarChar(30)
+  localisation     Boolean?       @default(true)
+  codeVerification String?        @db.VarChar(100)
+  roles            Json           @default("[\"ROLE_USER\"]")
+  typeCompte       String
+  images           String?
+  immatriculation  String?
+  expiredAt        DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  reservations     Reservations[]
+  rapports         Rapport[]
+}
+
+model Filieres {
+  id          Int    @id @default(autoincrement())
+  nom         String
+  description String
+
+  cours Cours[]
+}
+
+model Semestres {
+  id                 Int    @id @default(autoincrement())
+  numero             Int
+  anneeUniversitaire String
+
+  cours Cours[]
+}
+
+model Enseignants {
+  id            Int    @id @default(autoincrement())
+  nom           String
+  prenom        String
+  email         String @unique
+  telephone     String
+  specialite    String // Matière
+  disponibilite String //Horaires libres
+
+  cours          Cours[]
+  emploisDuTemps EmploisDuTemps[]
+}
+
+model Salles {
+  id           Int            @id @default(autoincrement())
+  code         String         @unique // ex: A202
+  nom          String?
+  capacite     String? // Nombre places
+  typeSalle    String // ex: TP, labo, amphi
+  equipements  String // ex: Projecteur, PC
+  status       String // libre ou occupée
+  reservations Reservations[]
+
+  disponibilitesSalles DisponibilitesSalles[]
+  emploisDuTemps       EmploisDuTemps[]
+}
+
+model Cours {
+  id             Int              @id @default(autoincrement())
+  nom            String
+  code           String?
+  description    String
+  volumeHoraire  Int //Nombre heures
+  typeCours      String // cours,tp,td,examen,reunion
+  enseignant_id  Int
+  filiere_id     Int
+  semestre_id    Int
+  enseignant     Enseignants      @relation(fields: [enseignant_id], references: [id], onDelete: Cascade)
+  filiere        Filieres         @relation(fields: [filiere_id], references: [id], onDelete: Cascade)
+  semestre       Semestres        @relation(fields: [semestre_id], references: [id], onDelete: Cascade)
+  reservations   Reservations[]
+  emploisDuTemps EmploisDuTemps[]
+}
+
+model EmploisDuTemps {
+  id Int @id @default(autoincrement())
+
+  dateCours  String
+  heureDebut String
+  heureFin   String
+
+  statut String
+
+  cours_id      Int
+  salle_id      Int
+  enseignant_id Int
+
+  cours      Cours       @relation(fields: [cours_id], references: [id])
+  salle      Salles      @relation(fields: [salle_id], references: [id])
+  enseignant Enseignants @relation(fields: [enseignant_id], references: [id])
+}
+
+model Reservations {
+  id              Int    @id @default(autoincrement())
+  dateReservation String
+  heureDebut      String
+  heureFin        String
+  useur_id        Int
+  salle_id        Int
+  cour_id         Int
+  useur           Users  @relation(fields: [useur_id], references: [id])
+  salle           Salles @relation(fields: [salle_id], references: [id])
+  cours           Cours  @relation(fields: [cour_id], references: [id])
+}
+
+model DisponibilitesSalles {
+  id       Int @id @default(autoincrement())
+  salle_id Int
+
+  dateDispo  String
+  heureDebut String
+  heureFin   String
+
+  disponible Boolean @default(true)
+
+  salle Salles @relation(fields: [salle_id], references: [id])
+}
+
+model Rapport {
+  id Int @id @default(autoincrement())
+
+  type_rapport String
+
+  fichier String
+
+  genere_par Int
+
+  created_at DateTime @default(now())
+
+  utilisateur Users @relation(fields: [genere_par], references: [id])
+}

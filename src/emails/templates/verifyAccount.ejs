@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de compte - AUTOSHOP</title>
+    <link rel="stylesheet" href="/public/bootstrap/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff8f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #00A2EA;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 120px;
+            margin-bottom: 15px;
+        }
+
+        header h3 {
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #fff3e0;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #00A2EA;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        main section.text {
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        main section img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #00A2EA;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                flex-direction: row;
+                justify-content: center;
+                gap: 50px;
+            }
+
+            main section.text {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>Bonjour <%=Name%> !</h3>
+        <p>Votre code de vérification AUTOSHOP est : <%=verificationCode%>
+        </p>
+    </header>
+
+    <main class="container">
+        <section class="text">
+            <p>
+                Bienvenue sur <strong>AUTOSHOP</strong> ! Pour activer votre compte et commencer à publier vos
+                offres, utilisez le code ci-dessus.
+                <br><br>
+                Si vous n’avez pas demandé ce code, ignorez ce message.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <small>© <%=new Date().getFullYear()%> AUTOSHOP.</small>
+    </footer>
+</body>
+
+</html>

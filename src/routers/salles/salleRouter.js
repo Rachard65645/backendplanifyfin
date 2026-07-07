@@ -14,7 +14,7 @@ salleRouter.get("/salles/all", getAllSallesController)
 
 salleRouter.get("/salles/:id", getOneSalleController)
 
-salleRouter.param("/salles/update/:id", updateSalleController)
+salleRouter.patch("/salles/update/:id", updateSalleController)
 
 salleRouter.delete("/salles/delete/:id", deleteSalleController)
 

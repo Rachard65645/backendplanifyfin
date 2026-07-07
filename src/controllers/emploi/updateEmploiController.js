@@ -18,6 +18,9 @@ export const updateEmploiController = async (req, res) => {
             }
         })
 
+
+        
+
         if (!emploi) {
             return res.status(404).json({
                 success: false,

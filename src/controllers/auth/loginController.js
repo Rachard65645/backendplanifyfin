@@ -10,9 +10,6 @@ export const LoginController = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        console.log(email);
-        
-
         const user = await prisma.users.findUnique({
             where: { email }
         });

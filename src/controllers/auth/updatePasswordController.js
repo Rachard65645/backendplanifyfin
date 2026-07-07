@@ -13,7 +13,6 @@ export const updatePasswordController = async (req, res) => {
         if (!user) {
             return res.status(codeHttp.NOT_FOUND).json({ message: authErrorMessages.USER_NOT_FOUND });
         }
-        console.log(user);
 
         const passwordHash = await hasherPasswordService(newPassword);
         await prisma.users.update({

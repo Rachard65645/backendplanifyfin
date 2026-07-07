@@ -15,7 +15,7 @@ enseignantRouter.get("/enseignants/all", getAllEnseignantsController)
 
 enseignantRouter.get("/enseignants/:id", getOneEnseignantController)
 
-enseignantRouter.put("/enseignants/update/:id", updateEnseignantController)
+enseignantRouter.patch("/enseignants/update/:id", updateEnseignantController)
 
 enseignantRouter.delete("/enseignants/delete/:id", deleteEnseignantController)
 

@@ -23,7 +23,7 @@ export const verifyAccountController = async (req, res) => {
                 expiredAt: expirationDate
             }
         });
-        await sendEmailverifyAccount(user.Name, user.email, verificationCode);
+        // await sendEmailverifyAccount(user.Name, user.email, verificationCode);
         return res.status(codeHttp.SUCCESS).json({ email: user.email, message: authSuccessMessages.EMAIL_VERIFICATION_SUCCESS });
     } catch (err) {
         return res.status(codeHttp.INTERNAL_SERVER_ERROR).json({ message: authErrorMessages.INTERNAL_SERVER_ERROR, error: err.message });

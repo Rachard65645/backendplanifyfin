@@ -9,7 +9,7 @@ import { role, typeComptes } from '../../utils/utils.js';
 
 export const RegisterController = async (req, res) => {
     try {
-        const { Name, email, password, telephone, immatriculation, typeCompte } = req.body;
+        const { email, password, immatriculation } = req.body;
 
         const user = await prisma.users.findUnique({
             where: { email }
@@ -26,20 +26,10 @@ export const RegisterController = async (req, res) => {
 
         const newUser = await prisma.users.create({
             data: {
-                Name,
                 email,
                 password: passwordHash,
-                telephone,
-                typeCompte: "USER",
-                immatriculation: immatriculation || ''
+                immatriculation,
             },
-            select: {
-                id: true,
-                Name: true,
-                email: true,
-                telephone: true,
-                roles: true,
-            }
         })
 
         const token = await generateToken(newUser);

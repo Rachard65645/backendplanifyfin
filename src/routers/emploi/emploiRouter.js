@@ -15,7 +15,7 @@ emploiRouter.get("/emploi/all", getAllEmploisController)
 
 emploiRouter.get("/emploi/:id", getOneEmploiController)
 
-emploiRouter.put("/emploi/update/:id", updateEmploiController)
+emploiRouter.patch("/emploi/update/:id", updateEmploiController)
 
 emploiRouter.delete("/emploi/delete/:id", deleteEmploiController)
 

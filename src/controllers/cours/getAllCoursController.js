@@ -9,7 +9,7 @@ export const getAllCoursController = async (req, res) => {
                 enseignant: true,
                 filiere: true,
                 semestre: true,
-                reservations: true
+               
             },
 
             orderBy: {

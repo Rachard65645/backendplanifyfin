@@ -14,7 +14,7 @@ courRouter.get("/cours/all", getAllCoursController)
 
 courRouter.get("/cours/:id", getOneCoursController)
 
-courRouter.put("/cours/update/:id", updateCoursController)
+courRouter.patch("/cours/update/:id", updateCoursController)
 
 courRouter.delete("/cours/delete/:id", deleteCoursController)
 

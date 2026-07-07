@@ -14,7 +14,7 @@ filiereRouter.get("/filiere/all", getAllFilieresController)
 
 filiereRouter.get("/filiere/:id", getOneFiliereController)
 
-filiereRouter.put("/filiere/update/:id", updateFiliereController)
+filiereRouter.patch("/filiere/update/:id", updateFiliereController)
 
 filiereRouter.delete("/filiere/delete/:id", deleteFiliereController)
 

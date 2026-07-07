@@ -10,20 +10,20 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Users {
   id               Int            @id @default(autoincrement())
-  Name             String         @db.VarChar(100)
+  Name             String?        @db.VarChar(100)
   email            String         @unique @db.VarChar(191)
   password         String
-  telephone        String         @db.VarChar(30)
+  telephone        String?        @db.VarChar(30)
   localisation     Boolean?       @default(true)
   codeVerification String?        @db.VarChar(100)
   roles            Json           @default("[\"ROLE_USER\"]")
-  typeCompte       String
+  typeCompte       String?
   images           String?
   immatriculation  String?
   expiredAt        DateTime?
